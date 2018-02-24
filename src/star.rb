@@ -8,18 +8,18 @@ require 'mysql2'
 '340355960@qq.com'
 ]
 @count=0
-def changeAccount(i)
-  @account[i%(@account.length)]
+def changeAccount()
+  @account[@count%(@account.length)]
 end
 
 def getProjectStar(repo_name)
   k=0
   begin
     url="https://api.github.com/repos/#{repo_name}"
-    f=open(url,:http_basic_authentication=>[@account[@count], 'cumtzc04091751'])
+    f=open(url,:http_basic_authentication=>[changeAccount(), 'cumtzc04091751'])
     stars=JSON.parse(f.read)['stargazers_count']
     puts "#{repo_name}     #{stars}"
-    puts "#{repo_name}     #{@account[@count]}     #{f.meta["x-ratelimit-remaining"]}"
+    puts "#{repo_name}     #{changeAccount()}     #{f.meta["x-ratelimit-remaining"]}"
     @count+=1 if f.meta["x-ratelimit-remaining"].to_i<10
   rescue => e
     puts "#{e.message}"
@@ -47,7 +47,7 @@ def getTravisBuildNumber(repo_name)
 end
 
 def mysql_initiallize
-  @client = Mysql2::Client.new(:host => 'localhost', :username => 'root',:password=>'701015')
+  @client = Mysql2::Client.new(:host => 'localhost', :username => 'root',:password=>'root')
   results = @client.query('CREATE DATABASE IF NOT EXISTS zc')
   results = @client.query('USE zc')
   results = @client.query('CREATE TABLE IF NOT EXISTS repository(
@@ -72,4 +72,4 @@ def scanCSV(csv_file_path)
     end
   end
 end
-scanCSV('../data/test.csv')
+scanCSV('../data/java.csv')
