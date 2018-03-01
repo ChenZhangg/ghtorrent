@@ -46,7 +46,7 @@ def mysql_initiallize
   @client = Mysql2::Client.new(:host => 'localhost', :username => 'root',:password=>'root')
   results = @client.query('CREATE DATABASE IF NOT EXISTS zc')
   results = @client.query('USE zc')
-  results = @client.query('CREATE TABLE IF NOT EXISTS repository(
+  results = @client.query('CREATE TABLE IF NOT EXISTS repository_only_builds(
     reponame varchar(255),
     stars int,
     builds int
@@ -57,14 +57,15 @@ def scanCSV(csv_file_path)
   mysql_initiallize
   SmarterCSV.process(csv_file_path, {:chunk_size => 10, :headers_in_file => false, :user_provided_headers => [:url, :repo_name]}) do |chunk|
     chunk.each do |row|
-      stars=getProjectStar(row[:repo_name])
+      #stars=getProjectStar(row[:repo_name])
       builds=getTravisBuildNumber(row[:repo_name])
       puts
-      statement = @client.prepare('INSERT INTO repository(reponame,stars,builds) VALUES(?,?,?);')
-      statement.execute(row[:repo_name],stars,builds)
+      #@statement = @client.prepare('INSERT INTO repository(reponame,stars,builds) VALUES(?,?,?);')
+      @statement = @client.prepare('INSERT INTO repository_only_builds(reponame,builds) VALUES(?,?);')
+      @statement.execute(row[:repo_name],builds)
     end
   end
 end
-@account=ARGV[1]
-@password=ARGV[2]
+#@account=ARGV[1]
+#@password=ARGV[2]
 scanCSV(ARGV[0])
