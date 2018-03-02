@@ -73,8 +73,8 @@ def storeDifferenceSet(array)
   end
 end
 
-CSV.foreach('java.csv') do |row|
-  @array_a<<row[1]
+CSV.foreach('java_above200.csv',:headers=>true) do |row|
+  @array_a<<row[0]
 end
 
 CSV.foreach('Above1000WithTravisAbove1000.csv') do |row|
