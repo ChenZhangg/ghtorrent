@@ -3,25 +3,15 @@ require 'open-uri'
 require 'travis'
 require 'mysql2'
 
-@account='340355960@qq.com'
 @password='cumtzc04091751'
-def getProjectStar(repo_name)
-  k=0
-  begin
-    url="https://api.github.com/repos/#{repo_name}"
-    f=open(url,:http_basic_authentication=>[@account, @password])
-    stars=JSON.parse(f.read)['stargazers_count']
-    puts "#{repo_name}     stars: #{stars}"
-    puts "#{repo_name}     Account:#{@account}     Remain: #{f.meta["x-ratelimit-remaining"]}"
-      #@count+=1 if f.meta["x-ratelimit-remaining"].to_i<10
-  rescue => e
-    puts "#{e.message}"
-    k+=1
-    stars=0
-    sleep 5
-    retry if k<3 && e.message.include?('403')
-  end
-  stars
+
+@a=['zhangch1991425@163.com','340355960@qq.com']
+@i=0
+@account=@a[@i]
+
+def changeAccount
+  @i+=1
+  @account=@a[@i/@a.length]
 end
 
 def getTravisBuildNumber(repo_name)
@@ -38,22 +28,22 @@ def getTravisBuildNumber(repo_name)
   builds
 end
 
-def urlOpen(url)
+def urlOpen(url,flag)
   begin
     f=open(url,:http_basic_authentication=>[@account, @password])
     puts "x-ratelimit-remaining: #{f.meta["x-ratelimit-remaining"]}"
   rescue =>e
     puts "cannot open #{url}\n#{e.message}"
-    puts "x-ratelimit-remaining: #{f.meta["x-ratelimit-remaining"]}"
+    f=nil
     sleep 5
-    retry
+    retry if flag
   end
   f
 end
 
 def getProjectsList(url)
   puts "Scanning #{url}  use  account=#{@account}"
-  f=urlOpen(url)
+  f=urlOpen(url,true)
 
   match=f.meta['link'].match(/<(.+?)>/)
   next_url=match[1]
@@ -64,7 +54,10 @@ def getProjectsList(url)
 
     builds=getTravisBuildNumber(hash['full_name'])
 
-    rf=urlOpen(repo_url)
+    rf=urlOpen(repo_url,false)
+
+    next unless rf
+    changeAccount if rf.meta["x-ratelimit-remaining"].to_i<1000
     json=JSON.parse(rf.read)
 
     stars=json['stargazers_count']
