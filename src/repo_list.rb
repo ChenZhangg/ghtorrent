@@ -41,8 +41,10 @@ end
 def urlOpen(url)
   begin
     f=open(url,:http_basic_authentication=>[@account, @password])
+    puts "x-ratelimit-remaining: #{f.meta["x-ratelimit-remaining"]}"
   rescue =>e
     puts "cannot open #{url}\n#{e.message}"
+    puts "x-ratelimit-remaining: #{f.meta["x-ratelimit-remaining"]}"
     sleep 5
     retry
   end
@@ -64,6 +66,7 @@ def getProjectsList(url)
 
     rf=urlOpen(repo_url)
     json=JSON.parse(rf.read)
+
     stars=json['stargazers_count']
     language=json['language']
     puts "#{hash['id']}    #{hash['full_name']}   language: #{language}      stars: #{stars}      builds: #{builds}"
