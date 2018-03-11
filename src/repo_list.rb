@@ -1,7 +1,7 @@
 require 'json'
 require 'open-uri'
 require 'travis'
-#require 'mysql2'
+require 'mysql2'
 
 @account='340355960@qq.com'
 @password='cumtzc04091751'

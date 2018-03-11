@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5721a97-939e-45e0-bd11-10c641396094" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/repo_list.rb" />
-      <change beforePath="$PROJECT_DIR$/.idea/ghtorrent.iml" afterPath="$PROJECT_DIR$/.idea/ghtorrent.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/repo_list.rb" afterPath="$PROJECT_DIR$/src/repo_list.rb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,8 +32,8 @@
       <file leaf-file-name="repo_list.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/repo_list.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="75" column="3" lean-forward="true" selection-start-line="75" selection-start-column="3" selection-end-line="75" selection-end-column="3" />
+            <state relative-caret-position="-667">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -250,12 +248,12 @@
       <workItem from="1519866322199" duration="2864000" />
       <workItem from="1519869732679" duration="7853000" />
       <workItem from="1519953078283" duration="558000" />
-      <workItem from="1520736206460" duration="6876000" />
+      <workItem from="1520736206460" duration="7104000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66619000" />
+    <option name="totallyTimeSpent" value="66847000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -571,8 +569,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/repo_list.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="75" column="3" lean-forward="true" selection-start-line="75" selection-start-column="3" selection-end-line="75" selection-end-column="3" />
+        <state relative-caret-position="-667">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
