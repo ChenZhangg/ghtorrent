@@ -36,7 +36,7 @@ def urlOpen(url,flag)
     puts "cannot open #{url}\n#{e.message}"
     f=nil
     sleep 5
-    retry if flag
+    retry if flag&&!e.message.include?('404')
   end
   f
 end
@@ -84,5 +84,5 @@ def mysql_initiallize
     );')
 end
 mysql_initiallize
-getProjectsList('https://api.github.com/repositories?since=247469')
-#getProjectsList('https://api.github.com/repositories')
+getProjectsList('https://api.github.com/repositories?since=251631')
+#urlOpen('https://api.github.com/repos/ahtest/cucumber',true)
