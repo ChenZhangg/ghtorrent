@@ -54,7 +54,7 @@ def getProjectsList(url)
 
     builds=getTravisBuildNumber(hash['full_name'])
 
-    rf=urlOpen(repo_url,false)
+    rf=urlOpen(repo_url,true)
 
     next unless rf
     changeAccount if rf.meta["x-ratelimit-remaining"].to_i<1000
@@ -84,4 +84,5 @@ def mysql_initiallize
     );')
 end
 mysql_initiallize
-getProjectsList('https://api.github.com/repositories')
+getProjectsList('https://api.github.com/repositories?since=247408')
+#getProjectsList('https://api.github.com/repositories')
